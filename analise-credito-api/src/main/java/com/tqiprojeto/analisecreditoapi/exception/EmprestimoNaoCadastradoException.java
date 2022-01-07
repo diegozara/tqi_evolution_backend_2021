@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class EmprestimoNaoCadastradoException extends  Exception{
 
         public EmprestimoNaoCadastradoException(Integer id){
-            super("Emprestimo nao localizado com id: "+ id);
+            super("Emprestimo nao cadastrado com id: "+ id);
         }
     }
 

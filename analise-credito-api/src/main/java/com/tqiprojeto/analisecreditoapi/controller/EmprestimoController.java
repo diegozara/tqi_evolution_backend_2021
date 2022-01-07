@@ -4,13 +4,13 @@ import com.tqiprojeto.analisecreditoapi.entity.Emprestimo;
 import com.tqiprojeto.analisecreditoapi.exception.EmprestimoDataPrimeiraParcelaExcedida;
 import com.tqiprojeto.analisecreditoapi.exception.EmprestimoNaoCadastradoException;
 import com.tqiprojeto.analisecreditoapi.exception.EmprestimoParcelasExcedida;
+import com.tqiprojeto.analisecreditoapi.repository.EmprestimoRetornoDetalhado;
 import com.tqiprojeto.analisecreditoapi.repository.EmprestimoRetornoSimples;
 import com.tqiprojeto.analisecreditoapi.service.EmprestimoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.text.ParseException;
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class EmprestimoController {
 
     //lista completa dos campos de todos os emprestimos de um cliente especificado por id
     @GetMapping("/clientes/detalhado/{id}")
-    public List<Emprestimo> listarEmprestimoDetalhado (@PathVariable Integer id) throws  EmprestimoNaoCadastradoException{
+    public List<EmprestimoRetornoDetalhado> listarEmprestimoDetalhado (@PathVariable Integer id) throws  EmprestimoNaoCadastradoException{
         return emprestimoService.listarEmprestimoDetalhado(id);
     }
 

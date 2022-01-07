@@ -1,6 +1,7 @@
 package com.tqiprojeto.analisecreditoapi.controller;
 
 import com.tqiprojeto.analisecreditoapi.entity.Cliente;
+import com.tqiprojeto.analisecreditoapi.exception.ClienteDbException;
 import com.tqiprojeto.analisecreditoapi.exception.ClienteNaoCadastradoException;
 import com.tqiprojeto.analisecreditoapi.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ public class ClienteController {
     //deletar cliente por id
     @DeleteMapping ("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletar (@PathVariable Integer id) throws ClienteNaoCadastradoException{
+    public void deletar (@PathVariable Integer id) throws ClienteNaoCadastradoException, ClienteDbException {
         clienteService.deletar(id);
     }
 

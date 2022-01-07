@@ -49,6 +49,7 @@ public class Cliente {
     private String senha;
 
 
+    //objeto de acesso da classe endereço (responsavel por fazer a busca automatica pelo CEP)
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;

@@ -1,5 +1,6 @@
 package com.tqiprojeto.analisecreditoapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,7 +30,7 @@ public class Emprestimo {
     private Integer quantidadeParcelas;
 
     @Column(nullable = false)
-  //  @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataPrimeiraParcela;
 
     @ManyToOne(fetch = FetchType.LAZY)

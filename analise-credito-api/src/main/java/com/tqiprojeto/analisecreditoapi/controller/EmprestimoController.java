@@ -1,6 +1,7 @@
 package com.tqiprojeto.analisecreditoapi.controller;
 
 import com.tqiprojeto.analisecreditoapi.entity.Emprestimo;
+import com.tqiprojeto.analisecreditoapi.exception.ClienteNaoCadastradoException;
 import com.tqiprojeto.analisecreditoapi.exception.EmprestimoDataPrimeiraParcelaExcedida;
 import com.tqiprojeto.analisecreditoapi.exception.EmprestimoNaoCadastradoException;
 import com.tqiprojeto.analisecreditoapi.exception.EmprestimoParcelasExcedida;
@@ -53,7 +54,7 @@ public class EmprestimoController {
     //cadastrar emprestimo
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Emprestimo solicitar (@RequestBody Emprestimo emprestimo ) throws EmprestimoParcelasExcedida, ParseException, EmprestimoDataPrimeiraParcelaExcedida {
+    public Emprestimo solicitar (@RequestBody Emprestimo emprestimo ) throws EmprestimoParcelasExcedida, ParseException, EmprestimoDataPrimeiraParcelaExcedida, ClienteNaoCadastradoException {
         return emprestimoService.solicitar(emprestimo);
     }
 

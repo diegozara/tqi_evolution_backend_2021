@@ -1,16 +1,11 @@
 package com.tqiprojeto.analisecreditoapi.service;
 
 import com.tqiprojeto.analisecreditoapi.entity.Cliente;
-import com.tqiprojeto.analisecreditoapi.entity.Emprestimo;
 import com.tqiprojeto.analisecreditoapi.entity.Endereco;
 import com.tqiprojeto.analisecreditoapi.exception.ClienteDbException;
 import com.tqiprojeto.analisecreditoapi.exception.ClienteNaoCadastradoException;
-import com.tqiprojeto.analisecreditoapi.exception.EmprestimoNaoCadastradoException;
 import com.tqiprojeto.analisecreditoapi.repository.ClienteRepository;
 import com.tqiprojeto.analisecreditoapi.repository.EmprestimoRepository;
-import com.tqiprojeto.analisecreditoapi.repository.EmprestimoRetornoDetalhado;
-import com.tqiprojeto.analisecreditoapi.repository.EmprestimoRetornoSimples;
-import org.hibernate.JDBCException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,12 +24,12 @@ public class ClienteService {
     private ClienteRepository clienteRepository;
     private PasswordEncoder passwordEncoder;
 
-    private EmprestimoRepository emprestimoRepository;
 
     @Autowired
     public ClienteService(ClienteRepository clienteRepository, PasswordEncoder passwordEncoder) {
         this.clienteRepository = clienteRepository;
         this.passwordEncoder = passwordEncoder;
+
     }
 
     //método para listar todos os clientes
@@ -76,13 +70,12 @@ public class ClienteService {
 
         verificarExistencia(id);
 
-        List<EmprestimoRetornoDetalhado> emprestimo = emprestimoRepository.listarEmprestimoDetalhado(id);
+       try {clienteRepository.deleteById(id);}
 
-            if (emprestimo.isEmpty()){
-                clienteRepository.deleteById(id);
-            }
+       catch (Exception e){
 
-        else {throw new ClienteDbException(id);}
+           throw new ClienteDbException(id);
+       }
 
     }
 

@@ -1,6 +1,7 @@
 package com.tqiprojeto.analisecreditoapi.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -46,6 +47,7 @@ public class Cliente {
     private String numeroCasa;
 
     @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senha;
 
 

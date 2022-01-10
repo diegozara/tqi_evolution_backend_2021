@@ -19,6 +19,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * @author Diego Zaratini Constantino - Adaptado do Tutorial do Rodrigo Tavares do canal Expertos Tech do youtube
+ * @link https://www.youtube.com/watch?v=WM8Ty4ITcFc
+ * @version 1.0.0
+ * @since Release 1.0
+ */
 public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter {
 
     public static final int TOKEN_EXPIRACAO = 600_000; //tempo equivalente a 10 minutos
@@ -27,11 +33,23 @@ public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
 
+    /**
+     * Construtor da Classe
+     *
+     * @param authenticationManager     Parametro de autenticação
+     */
     public JWTAutenticarFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 
-    //método de autenticação
+    /**
+     * Autenticação onde é verificado as informações dos clientes (e-mail e senha) cadastrados no banco
+     *
+     * @param request       Requisição para o serviço
+     * @param response      Resposta ao serviço requisitado
+     * @return              Sucesso da autenticação
+     * @throws AuthenticationException      Se não for autenticado email e senha
+     */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
@@ -49,7 +67,16 @@ public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter {
         }
     }
 
-    //método para criação do token
+    /**
+     * Criação do token, tempo de expiração e acesso as informações de validação e-mail e senha dos clientes
+     *
+     * @param request           Requisição para o serviço
+     * @param response          Resposta ao serviço requisitado
+     * @param chain             Filtro de segurança do Spring Security
+     * @param authResult        Autenticação do TOKEN
+     * @throws IOException      Se houver aluma falha de verificação dos parametros
+     * @throws ServletException Se a requisição não for processada
+     */
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,

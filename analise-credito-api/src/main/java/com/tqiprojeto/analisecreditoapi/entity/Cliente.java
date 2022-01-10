@@ -9,6 +9,12 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 
+/**
+ * @author Diego Zaratini Constantino
+ * @version 1.0.0
+ * @see Endereco
+ * @since Release 1.0
+ */
 @Entity
 @Getter
 @Setter
@@ -21,19 +27,19 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id; //gerenciamento automático do ID pelo banco de dados
 
     @Column(nullable = false)
     private String nome;
 
-    @CPF(message = "CPF invalido")
+    @CPF(message = "CPF invalido") //verificação da validade do CPF
     @Column(nullable = false, unique = true)
     private String cpf;
 
     @Column(nullable = false, unique = true)
     private String rg;
 
-    @Email(message = "email invalido")
+    @Email(message = "email invalido") //verificação da validade do e-mail
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -47,7 +53,7 @@ public class Cliente {
     private String numeroCasa;
 
     @Column(nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //configuração de segurança para não retornar a senha no objeto após cadastro
     private String senha;
 
 

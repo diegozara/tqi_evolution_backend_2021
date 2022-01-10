@@ -3,12 +3,17 @@ package com.tqiprojeto.analisecreditoapi.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import java.time.LocalDate;
 
+
+/**
+ * @author Diego Zaratini Constantino
+ * @version 1.0.0
+ * @see Cliente
+ * @since Release 1.0
+ */
 @Entity
 @Getter
 @Setter
@@ -16,12 +21,12 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) //evita a serialização (looping do objeto cliente)
 public class Emprestimo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id;//gerenciamento automático do ID pelo banco de dados
 
     @Column(nullable = false)
     private Double valor;
@@ -30,9 +35,10 @@ public class Emprestimo {
     private Integer quantidadeParcelas;
 
     @Column(nullable = false)
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy") //fomado de inserção da data dia/mes/ano com 4 dígitos
     private LocalDate dataPrimeiraParcela;
 
+    //objeto de acesso da classe cliente e seu mapeamento
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

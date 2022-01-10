@@ -5,6 +5,12 @@ import lombok.*;
 
 import javax.persistence.*;
 
+/**
+ * @author Diego Zaratini Constantino
+ * @version 1.0.0
+ * @see Cliente
+ * @since Release 1.0
+ */
 @Entity
 @Getter
 @Setter
@@ -12,7 +18,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) //evita a serialização (looping do objeto cliente)
 public class Endereco {
 
     @Id

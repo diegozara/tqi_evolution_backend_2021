@@ -59,7 +59,6 @@ public class JWTConfiguracao extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeHttpRequests()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/clientes").permitAll() // autorização do cadastro de clientes sem autenticação
-                .antMatchers("/swagger-ui.html").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAutenticarFilter(authenticationManager()))
